@@ -20,4 +20,3 @@
 {!! $users->render() !!}
 @endif
 
-@endif

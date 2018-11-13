@@ -45,16 +45,13 @@ class User extends Authenticatable
     
     public function follow($userId)
     {
-        // 既にフォローしているか
         $exist = $this->is_following($userId);
-        // 自分自身ではないか
+      
         $its_me = $this->id == $userId;
 
         if ($exist || $its_me) {
-            // 既にフォローしていれば何もしない
             return false;
         } else {
-            // 未フォローであればフォローする
             $this->followings()->attach($userId);
             return true;
         }
@@ -62,17 +59,13 @@ class User extends Authenticatable
 
     public function unfollow($userId)
     {
-        // 既にフォローしている
         $exist = $this->is_following($userId);
-        // 自分自身ではないか
         $its_me = $this->id == $userId;
 
         if ($exist && !$its_me) {
-            // 既にフォローしていればフォローを外す
             $this->followings()->detach($userId);
             return true;
         } else {
-            // 未フォローであれば何もしない
             return false;
         }
     }
@@ -80,6 +73,13 @@ class User extends Authenticatable
     public function is_following($userId)
     {
         return $this->followings()->where('follow_id', $userId)->exists();
+    }
+    
+    public function feed_photoposts()
+    {
+        $follow_user_ids = $this->followings()-> pluck('users.id')->toArray();
+        $follow_user_ids[] = $this->id;
+        return Photopost::whereIn('user_id', $follow_user_ids);
     }
     
     

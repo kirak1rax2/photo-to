@@ -1,12 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="text-center">
-        <h1>Log in</h1>
-    </div>
 
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-xs-offset-3 col-xs-6">
 
             {!! Form::open(['route' => 'login.post']) !!}
                 <div class="form-group">
@@ -18,9 +15,10 @@
                     {!! Form::label('password', 'Password') !!}
                     {!! Form::password('password', ['class' => 'form-control']) !!}
                 </div>
-
-                {!! Form::submit('Log in', ['class' => 'btn btn-primary btn-block']) !!}
-            {!! Form::close() !!}
+                <div class="text-center">
+                        {!! Form::submit('ログイン', ['class' => 'btn btn-primary']) !!}
+                    </div>
+                {!! Form::close() !!}
 
             <p>New user? {!! link_to_route('signup.get', 'Sign up now!') !!}</p>
         </div>

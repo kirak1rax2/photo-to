@@ -18,17 +18,14 @@ class PhototoController extends Controller
         $data = [];
         if (\Auth::check()) {
             $user = \Auth::user();
-            $photoposts = $user->photoposts()->orderBy('created_at', 'desc')->paginate(10);
+            $photoposts = $user->feed_photoposts()->orderBy('created_at', 'desc')->paginate(10);
 
             $data = [
                 'user' => $user,
                 'photoposts' => $photoposts,
             ];
-            $data += $this->counts($user);
-            return view('users.show', $data);
-        }else {
-            return view('welcome');
         }
+        return view('welcome', $data);
     }
     
     public function store(Request $request)
@@ -46,7 +43,7 @@ class PhototoController extends Controller
     
     public function destroy($id)
     {
-      $photopost = \App\Phototo::find($id);
+      $photopost = \App\Photopost::find($id);
 
         if (\Auth::id() === $photopost->user_id) {
             $photopost->delete();

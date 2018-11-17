@@ -1,12 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
-   <div class="text-center">
-        <h1>Sign up</h1>
-   </div>
+   
 
    <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-xs-offset-3 col-xs-6">
 
             {!! Form::open(['route' => 'signup.post']) !!}
                 <div class="form-group">
@@ -28,9 +26,10 @@
                     {!! Form::label('password_confirmation', 'Confirmation') !!}
                     {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
                 </div>
-
-                {!! Form::submit('Sign up', ['class' => 'btn btn-primary btn-block']) !!}
-            {!! Form::close() !!}
+                <div class="text-center">
+                   {!! Form::submit('sign up', ['class' => 'btn btn-primary']) !!}
+                </div>
+                {!! Form::close() !!}
       </div>
-    </div>
+   </div>
 @endsection

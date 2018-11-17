@@ -61,5 +61,35 @@ public function index()
 
         return view('users.followers', $data);
     }
+    
+    public function isfavorite($id)
+    {
+        $photopost = Photopost::find($id);
+        $isfavorites = $photopost->Favorites()->paginate(10);
+
+        $data = [
+            'photopost' => $photopost,
+            'photoposts' => $isfavorites,
+        ];
+
+        $data += $this->counts($photopost);
+
+        return view('photoposts.isfavorites', $data);
+    }
+
+    public function isfavorites($id)
+    {
+        $user = User::find($id);
+        $isfavorites = $user->Favorites()->paginate(10);
+
+        $data = [
+            'user' => $user,
+            'photoposts' => $isfavorites,
+        ];
+
+        $data += $this->counts($user);
+
+        return view('users.isfavorites', $data);
+    }
 
 }

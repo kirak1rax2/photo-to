@@ -13,24 +13,31 @@
             </div>
             @include('user_follow.follow_button', ['user' => $user])
         </aside>
-       <div class="col-xs-8">
+        <div class="col-xs-8">
             <ul class="nav nav-tabs nav-justified">
                 <li role="presentation" class="{{ Request::is('users/' . $user->id) ? 'active' : '' }}"><a href="{{ route('users.show', ['id' => $user->id]) }}">TimeLine <span class="badge">{{ $count_photoposts }}</span></a></li>
                 <li role="presentation" class="{{ Request::is('users/*/followings') ? 'active' : '' }}"><a href="{{ route('users.followings', ['id' => $user->id]) }}">Followings <span class="badge">{{ $count_followings }}</span></a></li>
                 <li role="presentation" class="{{ Request::is('users/*/followers') ? 'active' : '' }}"><a href="{{ route('users.followers', ['id' => $user->id]) }}">Followers <span class="badge">{{ $count_followers }}</span></a></li>
                 <li role="presentation" class="{{ Request::is('users/*/isfavorites') ? 'active' : '' }}"><a href="{{ route('users.isfavorites', ['id' => $user->id]) }}">Favorites <span class="badge">{{ $count_isfavorites }}</span></a></li>
             </ul>
+
             @if (Auth::id() == $user->id)
-                  {!! Form::open(['route' => 'photoposts.store']) !!}
+                
+                  {!! Form::open(['route' => 'photoposts.store', 'files' => true]) !!}
                       <div class="form-group">
                           {!! Form::textarea('content', old('content'), ['class' => 'form-control', 'rows' => '2']) !!}
-                          {!! Form::submit('Post', ['class' => 'btn btn-primary btn-block']) !!}
+                          {!! Form::label('file', '画像のアップロード', ['class' => 'control-label']) !!}
+                          {!! Form::file('file') !!}
+                            
+                          {!! Form::submit('Post NOW!', ['class' => 'btn btn-primary btn-block']) !!}
                       </div>
                   {!! Form::close() !!}
             @endif
+            
             @if (count($photoposts) > 0)
                 @include('photoposts.photoposts', ['photoposts' => $photoposts])
             @endif
+        
         </div>
     </div>
 @endsection

@@ -13,7 +13,7 @@
               {{ $user->name }}
             </div>
             <div>
-                <p>{!! link_to_route('users.show', 'View Profile', ['id' => $user->id]) !!}</p>
+                <p>{!! link_to_route('users.show', 'View Profile?', ['id' => $user->id]) !!}</p>
             </div>
         </div>
         </aside>

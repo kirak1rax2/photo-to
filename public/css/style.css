@@ -8,7 +8,7 @@
 }
 /* body */
 body {
-    background: #f8f8ff;
+    background: #FFEBCD;
 }
 footer {
     margin-top: 40px;
@@ -22,7 +22,7 @@ footer {
 
 /* navbar */
 .navbar {
-    background-color:#000066;
+    background-color:brown;
 }
 
 /* cover */

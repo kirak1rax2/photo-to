@@ -13,6 +13,9 @@
                 <p>{!! nl2br(e($photopost->content)) !!}</p>
             </div>
             <div>
+                <img src="{{ Storage::disk('s3')->url($photopost->img_name) }}" alt="image" />
+            </div>
+            <div>
                 @if (Auth::id() == $photopost->user_id)
                     {!! Form::open(['route' => ['photoposts.destroy', $photopost->id], 'method' => 'delete']) !!}
                         {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-xs']) !!}
